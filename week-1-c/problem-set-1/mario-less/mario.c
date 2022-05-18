@@ -16,7 +16,8 @@ int get_pyramid_height(void)
     do
     {
         pyramid_height = get_int("Height: ");
-    } while (pyramid_height < 1 || pyramid_height > 8);
+    }
+    while (pyramid_height < 1 || pyramid_height > 8);
 
     return pyramid_height;
 }
