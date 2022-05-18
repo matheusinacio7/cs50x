@@ -4,6 +4,8 @@
 
 string get_card_number(char* card_number);
 string get_card_brand(string card_number);
+bool get_card_number_is_valid(string card_number);
+int get_sum_of_digits(int n);
 
 int main(void) 
 {
@@ -11,7 +13,19 @@ int main(void)
     get_card_number(card_number);
 
     const string card_brand = get_card_brand(card_number);
-    printf("%s\n", card_brand);
+    if (card_brand == "INVALID")
+    {
+        printf("%s\n", card_brand);
+        return 0;
+    }
+
+    bool has_valid_numbers = get_card_number_is_valid(card_number);
+    if (has_valid_numbers)
+    {
+        printf("%s\n", card_brand);
+    } else {
+        printf("INVALID");
+    }
 }
 
 string get_card_number(char* card_number)
@@ -56,4 +70,46 @@ string get_card_brand(string card_number)
     }
 
     return "INVALID";
+}
+
+bool get_card_number_is_valid(string card_number)
+{
+    int doubled_digits_sum = 0;
+    for (int i = strlen(card_number) - 2; i > -1; i -= 2)
+    {
+        int current_digit = (int) card_number[i] - 48;
+        int doubled_digit = current_digit * 2;
+        int sum_of_digits_doubled = get_sum_of_digits(doubled_digit);
+        doubled_digits_sum += sum_of_digits_doubled;
+    }
+
+    int not_doubled_digits_sum = 0;
+
+    for (int i = strlen(card_number) - 1; i > -1; i -= 2)
+    {
+        int current_digit = (int) card_number[i] - 48;
+        not_doubled_digits_sum += current_digit;
+    }
+
+    int sum = doubled_digits_sum + not_doubled_digits_sum;
+    if (sum % 10 == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int get_sum_of_digits(int n)
+{
+    char buffer[2];
+    sprintf(buffer, "%d", n);
+    int sum = 0;
+    for (int i = 0; i < strlen(buffer); i++)
+    {
+        sum += (int) buffer[i] - 48;
+    }
+    return sum;
 }
