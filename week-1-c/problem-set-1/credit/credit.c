@@ -9,7 +9,7 @@ int get_sum_of_digits(int n);
 
 int main(void) 
 {
-    char card_number[17] = {0};
+    char card_number[25] = {0};
     get_card_number(card_number);
 
     const string card_brand = get_card_brand(card_number);
@@ -48,7 +48,7 @@ string get_card_brand(string card_number)
     }
 
     // other cards need two digits
-    char first_two_digits[2] = {0};
+    char first_two_digits[4] = {0};
     memcpy(first_two_digits, card_number, 2);
 
     // check if card is American Express: starts with 34 or 37 and 15 digits
@@ -107,7 +107,7 @@ bool get_card_number_is_valid(string card_number)
 int get_sum_of_digits(int n)
 {
     char buffer[2] = {0};
-    sprintf(buffer, "%d", n);
+    sprintf(buffer, "%i", n);
     int sum = 0;
     for (int i = 0; i < strlen(buffer); i++)
     {
