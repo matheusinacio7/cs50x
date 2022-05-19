@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-string get_card_number(char* card_number);
+string get_card_number(char *card_number);
 string get_card_brand(string card_number);
 bool get_card_number_is_valid(string card_number);
 int get_sum_of_digits(int n);
@@ -24,13 +24,15 @@ int main(void)
     {
         printf("%s\n", card_brand);
         return 0;
-    } else {
+    }
+    else
+    {
         printf("INVALID\n");
         return 0;
     }
 }
 
-string get_card_number(char* card_number)
+string get_card_number(char *card_number)
 {
     const long long_card_number = get_long("What's the credit card number? ");
     sprintf(card_number, "%li", long_card_number);
@@ -53,7 +55,7 @@ string get_card_brand(string card_number)
 
     // check if card is American Express: starts with 34 or 37 and 15 digits
     const bool has_amex_first_digits = strcmp(first_two_digits, "34") == 0
-        || strcmp(first_two_digits, "37") == 0;
+                                       || strcmp(first_two_digits, "37") == 0;
     if (has_amex_first_digits && strlen(card_number) == 15)
     {
         return "AMEX";
@@ -61,10 +63,10 @@ string get_card_brand(string card_number)
 
     // check if card is Mastercard: starts with 51 through 55 and 16 digits
     const bool has_mastercard_first_digits = strcmp(first_two_digits, "51") == 0
-        || strcmp(first_two_digits, "52") == 0
-        || strcmp(first_two_digits, "53") == 0
-        || strcmp(first_two_digits, "54") == 0
-        || strcmp(first_two_digits, "55") == 0;
+            || strcmp(first_two_digits, "52") == 0
+            || strcmp(first_two_digits, "53") == 0
+            || strcmp(first_two_digits, "54") == 0
+            || strcmp(first_two_digits, "55") == 0;
     
     if (has_mastercard_first_digits && strlen(card_number) == 16)
     {
