@@ -30,7 +30,7 @@ int compute_score(string word)
     for (int i = 0; i < strlen(word); i++)
     {
         int letter_index = (int) toupper(word[i]) - codeForA;
-        int letter_score = letter_index > 0 && letter_index < 26 ? POINTS[letter_index] : 0;
+        int letter_score = letter_index >= 0 && letter_index <= 25 ? POINTS[letter_index] : 0;
         sum += letter_score;
     }
     return sum;
