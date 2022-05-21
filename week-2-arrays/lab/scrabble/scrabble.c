@@ -24,6 +24,13 @@ int main(void)
 
 int compute_score(string word)
 {
-    // TODO: Compute and return score for string
-    return 0;
+    int codeForA = 65;
+    int sum = 0;
+    for (int i = 0; i < strlen(word); i++)
+    {
+        int letter_index = (int) toupper(word[i]) - codeForA;
+        int letter_score = letter_index > 0 && letter_index < 26 ? POINTS[letter_index] : 0;
+        sum += letter_score;
+    }
+    return sum;
 }
