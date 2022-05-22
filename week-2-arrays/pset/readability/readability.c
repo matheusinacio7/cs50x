@@ -6,7 +6,7 @@
 int get_coleman_liau_index(float L, float S);
 int get_word_count(string text);
 int get_letter_count(string text);
-int get_split_string_count(string text, char *separators);
+int get_split_string_count(string text, char *separators, int separators_size);
 float get_average_letters_per_hundred_words(string text, int word_count);
 float get_average_sentences_per_hundred_words(string text, int word_count);
 
@@ -15,10 +15,10 @@ int main(void)
     printf("Colemn Liau Index Grade Calculator!\n");
     string text = get_string("Text: ");
     int word_count = get_word_count(text);
-    // float L = get_average_letters_per_hundred_words(text, word_count);
-    // float S = get_average_sentences_per_hundred_words(text, word_count);
-    // int index = get_coleman_liau_index(L, S);
-    // printf("Grade %i\n", index);
+    float L = get_average_letters_per_hundred_words(text, word_count);
+    float S = get_average_sentences_per_hundred_words(text, word_count);
+    int index = get_coleman_liau_index(L, S);
+    printf("Grade %i\n", index);
 }
 
 // Where L is the average of letters per 100 words in the text, and S is the average of sentences per 100 words in the text
@@ -29,16 +29,16 @@ int get_coleman_liau_index(float L, float S)
 
 int get_word_count(string text)
 {
-    return get_split_string_count(text, (char[]) {' '});
+    return get_split_string_count(text, (char[]) {' '}, 1) + 1;
 }
 
-int get_split_string_count(string text, char *separators)
+int get_split_string_count(string text, char *separators, int separators_size)
 {
-    int count = 1;
+    int count = 0;
 
     for (int i = 0; i < strlen(text); i++)
     {
-        for (int j = 0; j < sizeof(separators) / sizeof(char); j++)
+        for (int j = 0; j < separators_size; j++)
         {
             if (text[i] == separators[j])
             {
@@ -65,4 +65,17 @@ int get_letter_count(string text)
     }
 
     return count;
+}
+
+float get_average_letters_per_hundred_words(string text, int word_count)
+{
+    int letter_count = get_letter_count(text);
+    return (float) letter_count / word_count * 100;
+}
+
+float get_average_sentences_per_hundred_words(string text, int word_count)
+{
+    char separators[] = {'!','.','?'};
+    int sentence_count = get_split_string_count(text, separators, 3);
+    return (float) sentence_count / word_count * 100;
 }
