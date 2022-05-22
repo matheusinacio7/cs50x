@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <math.h>
 
 int get_coleman_liau_index(float L, float S);
 int get_word_count(string text);
@@ -24,7 +25,7 @@ int main(void)
 // Where L is the average of letters per 100 words in the text, and S is the average of sentences per 100 words in the text
 int get_coleman_liau_index(float L, float S)
 {
-    return (int)(0.0588 * L - 0.296 * S - 15.8);
+    return round(0.0588 * L - 0.296 * S - 15.8);
 }
 
 int get_word_count(string text)
