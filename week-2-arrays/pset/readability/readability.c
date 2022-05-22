@@ -3,6 +3,8 @@
 
 int get_coleman_liau_index(float L, float S);
 int get_word_count(string text);
+void split_string(string source, string *target);
+int get_substring_count(string text);
 float get_average_letters_per_hundred_words(string text, int word_count);
 float get_average_sentences_per_hundred_words(string text, int word_count);
 
@@ -21,4 +23,9 @@ int main(void)
 int get_coleman_liau_index(float L, float S)
 {
     return (int) (0.0588 * L - 0.296 * S - 15.8);
+}
+
+int get_word_count(string text)
+{
+
 }
