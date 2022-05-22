@@ -19,7 +19,19 @@ int main(void)
     float L = get_average_letters_per_hundred_words(text, word_count);
     float S = get_average_sentences_per_hundred_words(text, word_count);
     int index = get_coleman_liau_index(L, S);
-    printf("Grade %i\n", index);
+    if (index < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+    else if (index >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+    else
+    {
+        printf("Grade %i\n", index);
+    }
+    return 0;
 }
 
 // Where L is the average of letters per 100 words in the text, and S is the average of sentences per 100 words in the text
