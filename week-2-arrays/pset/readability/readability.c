@@ -1,9 +1,11 @@
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 int get_coleman_liau_index(float L, float S);
 int get_word_count(string text);
+int get_letter_count(string text);
 int get_split_string_count(string text, char *separators);
 float get_average_letters_per_hundred_words(string text, int word_count);
 float get_average_sentences_per_hundred_words(string text, int word_count);
@@ -42,6 +44,23 @@ int get_split_string_count(string text, char *separators)
             {
                 count++;
             }
+        }
+    }
+
+    return count;
+}
+
+int get_letter_count(string text)
+{
+    int count = 0;
+
+    for (int i = 0; i < strlen(text); i++)
+    {
+        char current_as_upper = toupper(text[i]);
+        int current_code = (int) current_as_upper;
+        if (current_code >= 65 && current_code <= 90)
+        {
+            count += 1;
         }
     }
 
