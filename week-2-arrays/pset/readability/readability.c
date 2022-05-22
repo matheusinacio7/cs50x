@@ -4,8 +4,7 @@
 
 int get_coleman_liau_index(float L, float S);
 int get_word_count(string text);
-void split_string(string *target, string source, char separator);
-int get_split_string_count(string text, char separator);
+int get_split_string_count(string text, char *separators);
 float get_average_letters_per_hundred_words(string text, int word_count);
 float get_average_sentences_per_hundred_words(string text, int word_count);
 
@@ -28,18 +27,21 @@ int get_coleman_liau_index(float L, float S)
 
 int get_word_count(string text)
 {
-    return get_split_string_count(text, ' ');
+    return get_split_string_count(text, (char[]) {' '});
 }
 
-int get_split_string_count(string text, char separator)
+int get_split_string_count(string text, char *separators)
 {
     int count = 1;
 
     for (int i = 0; i < strlen(text); i++)
     {
-        if (text[i] == separator)
+        for (int j = 0; j < sizeof(separators) / sizeof(char); j++)
         {
-            count++;
+            if (text[i] == separators[j])
+            {
+                count++;
+            }
         }
     }
 
