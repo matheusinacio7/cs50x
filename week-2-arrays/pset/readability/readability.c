@@ -38,6 +38,11 @@ int get_split_string_count(string text, char *separators, int separators_size)
 
     for (int i = 0; i < strlen(text); i++)
     {
+        if (text[i] == text[i - 1])
+        {
+            continue;
+        }
+
         for (int j = 0; j < separators_size; j++)
         {
             if (text[i] == separators[j])
