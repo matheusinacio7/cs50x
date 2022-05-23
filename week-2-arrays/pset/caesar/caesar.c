@@ -21,7 +21,7 @@ int main(int argc, string argv[])
     int key = string_to_int(argv[1]);
     string text = get_string("plaintext:  ");
     rotate_phrase(text, key);
-    printf("\nciphertext: %s\n", text);
+    printf("ciphertext: %s\n", text);
 }
 
 void print_usage_reminder(void)
@@ -43,18 +43,19 @@ char rotate_letter(char letter, int key)
     int upper_case_range[] = { 65, 90 };
     int lower_case_range[] = { 97, 122 };
 
-    if (code < upper_case_range[0] || code > lower_case_range[1])
+    if (code >= upper_case_range[0] && code <= upper_case_range[1])
     {
-        return letter;
+        int new_code = code + key % 26;
+        return new_code <= upper_case_range[1] ? (char) new_code : (char) new_code - 26;
     }
-    else if (code > upper_case_range[1] && code < lower_case_range[0])
+    else if (code >= lower_case_range[0] && code <= lower_case_range[1])
     {
-        return letter;
+        int new_code = code + key % 26;
+        return new_code <= lower_case_range[1] ? (char) new_code : (char) new_code - 26;
     }
     else
     {
-        int new_code = code + key % 26;
-        return (char) new_code;
+        return letter;
     }
 }
 
