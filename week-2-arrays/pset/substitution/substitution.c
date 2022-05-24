@@ -6,6 +6,7 @@
 
 void print_usage_reminder(void);
 void extract_cipher(string raw_cipher, char lower_case_cipher[26], char upper_case_cipher[26]);
+void encrypt(string plain, char lower_case_cipher[26], char upper_case_cipher[26]);
 
 int main(int argc, string argv[]) 
 {
@@ -22,13 +23,14 @@ int main(int argc, string argv[])
         return 1;
     }
 
-    // string raw_cipher = "JTREKYAVOGDXPSNCUIZLFBMWHQ";
-
     char upper_case_cipher[26] = { 'A' };
     char lower_case_cipher[26] = { 'a' };
     extract_cipher(raw_cipher, lower_case_cipher, upper_case_cipher);
 
-    // char whatever = 'k';
+    string text = get_string("plaintext:  ");
+    encrypt(text, lower_case_cipher, upper_case_cipher);
+    printf("ciphertext: %s\n", text);
+    return 0;
 }
 
 void print_usage_reminder(void)
@@ -49,5 +51,27 @@ void extract_cipher(string raw_cipher, char lower_case_cipher[26], char upper_ca
         }
         lower_case_cipher[i] = tolower(raw_cipher_char);
         upper_case_cipher[i] = toupper(raw_cipher_char);
+    }
+}
+
+void encrypt(string text, char lower_case_cipher[26], char upper_case_cipher[26])
+{
+    for (int i = 0; i < strlen(text); i++)
+    {
+        char plain_char = text[i];
+        if (isupper(plain_char))
+        {
+            int index = (int) plain_char - 65;
+            text[i] = upper_case_cipher[index];
+        }
+        else if (islower(plain_char))
+        {
+            int index = (int) plain_char - 97;
+            text[i] = lower_case_cipher[index];
+        }
+        else
+        {
+            text[i] = plain_char;
+        }
     }
 }
