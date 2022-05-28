@@ -23,9 +23,12 @@ int candidate_count;
 bool vote(string name);
 void print_winner(void);
 
-int main(int argc, string argv[])
+int main(void)
 {
     // Check for invalid usage
+    int argc = 4;
+    string argv[] = { "plurality", "Alice", "Bob", "Charlie" };
+
     if (argc < 2)
     {
         printf("Usage: plurality [candidate ...]\n");
@@ -66,13 +69,46 @@ int main(int argc, string argv[])
 // Update vote totals given a new vote
 bool vote(string name)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (strcmp(candidates[i].name, name) == 0)
+        {
+            candidates[i].votes += 1;
+            return true;
+        }
+    }
     return false;
 }
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
+    candidate current_winners[MAX] = {{ .name = "", .votes = 0 }};
+    int winner_count = 0;
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes > current_winners[0].votes)
+        {
+            current_winners[0] = candidates[i];
+            winner_count = 1;
+        }
+        else if (candidates[i].votes == current_winners[0].votes)
+        {
+            current_winners[winner_count] = candidates[i];
+            winner_count += 1;
+        }
+    }
+
+    string current_winner_name = "";
+    int i = 0;
+    do
+    {
+        current_winner_name = current_winners[i].name;
+        printf("%s\n", current_winner_name);
+        i += 1;
+    }
+    while (strcmp(current_winner_name, "") != 0 && i < winner_count);
+
     return;
 }
