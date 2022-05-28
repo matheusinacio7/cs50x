@@ -1,0 +1,11 @@
+sort1 uses: bubble sort
+
+How do you know?: exponential increase of runtime with input and different runtimes based on the topology of the array
+
+sort2 uses: merge sort
+
+How do you know?: doesn't increase runtime exponentially by increasing input
+
+sort3 uses: selection sort
+
+How do you know?: exponential increase of runtime with input increase and small variation based on topology of the array
