@@ -29,15 +29,16 @@ int candidate_count;
 // Function prototypes
 bool vote(int rank, string name, int ranks[]);
 void record_preferences(int ranks[]);
+bool has_path(int source, int target, int visited[]);
 void add_pairs(void);
 void sort_pairs(void);
 void lock_pairs(void);
 void print_winner(void);
 
-int main(int argc, string argv[])
+int main(void)
 {
-    // int argc = 4;
-    // string argv[] = { "tideman", "Alice", "Bob", "Charlie" };
+    int argc = 4;
+    string argv[] = { "tideman", "Alice", "Bob", "Charlie" };
 
     // Check for invalid usage
     if (argc < 2)
@@ -184,8 +185,59 @@ void sort_pairs(void)
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    // TODO
+    int potential_winners[MAX];
+    for (int i = 0; i < candidate_count; i++)
+    {
+        potential_winners[i] = true;
+    }
+
+    int remaining_potential_winners = candidate_count;
+    int last_potential_winner_index = 0;
+
+    for (int i = 0; i < pair_count; i++)
+    {
+        int visited[MAX] = { false };
+        locked[pairs[i].winner][pairs[i].loser] = true;
+        if (remaining_potential_winners == 1 && has_path(last_potential_winner_index, last_potential_winner_index, visited))
+        {
+            locked[pairs[i].winner][pairs[i].loser] = false;
+            continue;
+        }
+        potential_winners[pairs[i].loser] = false;
+        remaining_potential_winners -= 1;
+        if (remaining_potential_winners == 1)
+        {
+            for (int j = 0; j < candidate_count; j++)
+            {
+                if (potential_winners[j])
+                {
+                    last_potential_winner_index = j;
+                }
+            }
+        }
+    }
     return;
+}
+
+bool has_path(int source, int target, int visited[])
+{
+    visited[source] = true;
+    if (locked[source][target])
+    {
+        return true;
+    }
+
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (locked[source][i] && !visited[i])
+        {
+            if (has_path(i, target, visited))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Print the winner of the election
