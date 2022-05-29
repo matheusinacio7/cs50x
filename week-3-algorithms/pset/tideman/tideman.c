@@ -222,6 +222,21 @@ bool has_path(int source, int target, int visited[])
 // Print the winner of the election
 void print_winner(void)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        bool winner = true;
+        for (int j = 0; j < candidate_count; j++)
+        {
+            if (locked[j][i])
+            {
+                winner = false;
+            }
+        }
+        if (winner)
+        {
+            printf("%s\n", candidates[i]);
+            return;
+        }
+    }
     return;
 }
