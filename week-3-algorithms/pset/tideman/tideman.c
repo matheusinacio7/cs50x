@@ -36,6 +36,9 @@ void print_winner(void);
 
 int main(int argc, string argv[])
 {
+    // int argc = 4;
+    // string argv[] = { "tideman", "Alice", "Bob", "Charlie" };
+
     // Check for invalid usage
     if (argc < 2)
     {
@@ -97,6 +100,9 @@ int main(int argc, string argv[])
     return 0;
 }
 
+// Disclaimer: When I wrote this code, only god and I understood it.
+// Now, only God does...
+
 // Update ranks given a new vote
 bool vote(int rank, string name, int ranks[])
 {
@@ -127,7 +133,24 @@ void record_preferences(int ranks[])
 // Record pairs of candidates where one is preferred over the other
 void add_pairs(void)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = i + 1; j < candidate_count; j++)
+        {
+            if (preferences[i][j] > preferences [j][i])
+            {
+                pairs[pair_count].winner = i;
+                pairs[pair_count].loser = j;
+                pair_count += 1;
+            }
+            else if (preferences[j][i] > preferences[i][j])
+            {
+                pairs[pair_count].winner = j;
+                pairs[pair_count].loser = i;
+                pair_count += 1;
+            }
+        }
+    }
     return;
 }
 
