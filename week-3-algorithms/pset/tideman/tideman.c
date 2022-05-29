@@ -185,35 +185,14 @@ void sort_pairs(void)
 // Lock pairs into the candidate graph in order, without creating cycles
 void lock_pairs(void)
 {
-    int potential_winners[MAX];
-    for (int i = 0; i < candidate_count; i++)
-    {
-        potential_winners[i] = true;
-    }
-
-    int remaining_potential_winners = candidate_count;
-    int last_potential_winner_index = 0;
-
     for (int i = 0; i < pair_count; i++)
     {
         int visited[MAX] = { false };
         locked[pairs[i].winner][pairs[i].loser] = true;
-        if (remaining_potential_winners == 1 && has_path(last_potential_winner_index, last_potential_winner_index, visited))
+        if (has_path(pairs[i].winner, pairs[i].winner, visited))
         {
             locked[pairs[i].winner][pairs[i].loser] = false;
             continue;
-        }
-        potential_winners[pairs[i].loser] = false;
-        remaining_potential_winners -= 1;
-        if (remaining_potential_winners == 1)
-        {
-            for (int j = 0; j < candidate_count; j++)
-            {
-                if (potential_winners[j])
-                {
-                    last_potential_winner_index = j;
-                }
-            }
         }
     }
     return;
