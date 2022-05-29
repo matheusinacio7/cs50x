@@ -34,11 +34,8 @@ int find_min(void);
 bool is_tie(int min);
 void eliminate(int min);
 
-int main(void)
+int main(int argc, string argv[])
 {
-    int argc = 4;
-    string argv[] = { "runoff", "Alice", "Bob", "Charlie" };
-
     // Check for invalid usage
     if (argc < 2)
     {
