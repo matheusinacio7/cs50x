@@ -34,8 +34,11 @@ int find_min(void);
 bool is_tie(int min);
 void eliminate(int min);
 
-int main(int argc, string argv[])
+int main(void)
 {
+    int argc = 4;
+    string argv[] = { "runoff", "Alice", "Bob", "Charlie" };
+
     // Check for invalid usage
     if (argc < 2)
     {
@@ -147,11 +150,11 @@ void tabulate(void)
     {
         for (int j = 0; j < candidate_count; j++)
         {
-            candidate preferred_candidate = candidates[preferences[i][j]];
-            if (!preferred_candidate.eliminated)
+            int candidate_index = preferences[i][j];
+            if (!candidates[candidate_index].eliminated)
             {
                 // Break out of the inner loop, continue for other voters
-                preferred_candidate.votes += 1;
+                candidates[candidate_index].votes += 1;
                 break;
             }
         }
