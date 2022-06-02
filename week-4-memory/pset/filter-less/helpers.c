@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "helpers.h"
 
+BYTE clamp_color(int target);
+
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
 {
@@ -22,6 +24,19 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 // Convert image to sepia
 void sepia(int height, int width, RGBTRIPLE image[height][width])
 {
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            BYTE originalRed = image[h][w].rgbtRed;
+            BYTE originalGreen = image[h][w].rgbtGreen;
+            BYTE originalBlue = image[h][w].rgbtBlue;
+
+            image[h][w].rgbtRed = clamp_color(round(0.393 * originalRed + 0.769 * originalGreen + 0.189 * originalBlue));
+            image[h][w].rgbtGreen = clamp_color(round(0.349 * originalRed + 0.686 * originalGreen + 0.168 * originalBlue));
+            image[h][w].rgbtBlue = clamp_color(round(0.272 * originalRed + 0.534 * originalGreen + 0.131 * originalBlue));
+        }
+    }
     return;
 }
 
@@ -35,4 +50,17 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     return;
+}
+
+BYTE clamp_color(int target)
+{
+    if (target > 255)
+    {
+        return 255;
+    }
+    if (target < 0)
+    {
+        return 0;
+    }
+    return target;
 }
