@@ -97,50 +97,50 @@ int main(int argc, char *argv[])
         fseek(inptr, padding, SEEK_CUR);
     }
 
-    RGBTRIPLE myimage[3][3];
-    myimage[0][0].rgbtRed = 10;
-    myimage[0][0].rgbtGreen = 20;
-    myimage[0][0].rgbtBlue = 30;
+    // RGBTRIPLE myimage[3][3];
+    // myimage[0][0].rgbtRed = 10;
+    // myimage[0][0].rgbtGreen = 20;
+    // myimage[0][0].rgbtBlue = 30;
 
-    myimage[0][1].rgbtRed = 40;
-    myimage[0][1].rgbtGreen = 50;
-    myimage[0][1].rgbtBlue = 60;
+    // myimage[0][1].rgbtRed = 40;
+    // myimage[0][1].rgbtGreen = 50;
+    // myimage[0][1].rgbtBlue = 60;
 
-    myimage[0][2].rgbtRed = 70;
-    myimage[0][2].rgbtGreen = 80;
-    myimage[0][2].rgbtBlue = 90;
+    // myimage[0][2].rgbtRed = 70;
+    // myimage[0][2].rgbtGreen = 80;
+    // myimage[0][2].rgbtBlue = 90;
 
-    myimage[1][0].rgbtRed = 110;
-    myimage[1][0].rgbtGreen = 130;
-    myimage[1][0].rgbtBlue = 140;
+    // myimage[1][0].rgbtRed = 110;
+    // myimage[1][0].rgbtGreen = 130;
+    // myimage[1][0].rgbtBlue = 140;
 
-    myimage[1][1].rgbtRed = 120;
-    myimage[1][1].rgbtGreen = 140;
-    myimage[1][1].rgbtBlue = 150;
+    // myimage[1][1].rgbtRed = 120;
+    // myimage[1][1].rgbtGreen = 140;
+    // myimage[1][1].rgbtBlue = 150;
 
-    myimage[1][2].rgbtRed = 130;
-    myimage[1][2].rgbtGreen = 150;
-    myimage[1][2].rgbtBlue = 160;
+    // myimage[1][2].rgbtRed = 130;
+    // myimage[1][2].rgbtGreen = 150;
+    // myimage[1][2].rgbtBlue = 160;
 
-    myimage[2][0].rgbtRed = 200;
-    myimage[2][0].rgbtGreen = 210;
-    myimage[2][0].rgbtBlue = 220;
+    // myimage[2][0].rgbtRed = 200;
+    // myimage[2][0].rgbtGreen = 210;
+    // myimage[2][0].rgbtBlue = 220;
 
-    myimage[2][1].rgbtRed = 220;
-    myimage[2][1].rgbtGreen = 230;
-    myimage[2][1].rgbtBlue = 240;
+    // myimage[2][1].rgbtRed = 220;
+    // myimage[2][1].rgbtGreen = 230;
+    // myimage[2][1].rgbtBlue = 240;
 
-    myimage[2][2].rgbtRed = 240;
-    myimage[2][2].rgbtGreen = 250;
-    myimage[2][2].rgbtBlue = 255;
+    // myimage[2][2].rgbtRed = 240;
+    // myimage[2][2].rgbtGreen = 250;
+    // myimage[2][2].rgbtBlue = 255;
 
     // Filter image
     switch (filter)
     {
         // Blur
         case 'b':
-            // blur(height, width, image);
-            blur(3, 3, myimage);
+            blur(height, width, image);
+            // blur(3, 3, myimage);
             break;
 
         // Edges

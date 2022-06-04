@@ -23,8 +23,9 @@ int gy_kernel[3][3] =
 };
 
 BYTE clamp_color(int target);
-RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
-                          char weight_kernel);
+RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width]);
+int calculate_weighted_box_sum(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
+                               int sum[3], char weight_kernel);
 void copy_image(int height, int width, RGBTRIPLE original[height][width], RGBTRIPLE copy[height][width]);
 
 // Convert image to grayscale
@@ -70,22 +71,30 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     {
         for (int w = 0; w < width; w++)
         {
-            image[h][w] = get_box_average(height, width, h, w, original_image, 'd');
+            image[h][w] = get_box_average(height, width, h, w, original_image);
         }
     }
     free(original_image);
     return;
 }
 
-// weight_kernel is d for default, x for gx and y for gy
-RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
-                          char weight_kernel)
+RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width])
 {
-    int redSum = 0;
-    int greenSum = 0;
-    int blueSum = 0;
-    int count = 0;
+    int sum[3] = { 0, 0, 0 };
+    int count = calculate_weighted_box_sum(height, width, center_h, center_w, image, sum, 'd');
 
+    RGBTRIPLE average;
+    average.rgbtRed = round((float) sum[0] / count);
+    average.rgbtGreen = round((float) sum[1] / count);
+    average.rgbtBlue = round((float) sum[2] / count);
+    return average;
+}
+
+// weight_kernel is d for default, x for gx and y for gy
+int calculate_weighted_box_sum(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
+                               int sum[3], char weight_kernel)
+{
+    int count = 0;
     int (*kernel)[3][3] = &default_kernel;
 
     for (int j = 0; j < 3; j++)
@@ -102,22 +111,14 @@ RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGB
             {
                 continue;
             }
-            int my_little_kernel_value = (*kernel)[j][i];
             count += 1;
-            redSum += image[h][w].rgbtRed * (*kernel)[j][i];
-            greenSum += image[h][w].rgbtGreen * (*kernel)[j][i];
-            blueSum += image[h][w].rgbtBlue * (*kernel)[j][i];
+            sum[0] += image[h][w].rgbtRed * (*kernel)[j][i];
+            sum[1] += image[h][w].rgbtGreen * (*kernel)[j][i];
+            sum[2] += image[h][w].rgbtBlue * (*kernel)[j][i];
         }
     }
-
-    RGBTRIPLE average;
-    average.rgbtRed = round((float) redSum / count);
-    average.rgbtGreen = round((float) greenSum / count);
-    average.rgbtBlue = round((float) blueSum / count);
-    return average;
+    return count;
 }
-
-// void calculate_weighted_box_sum(int sum[3], )
 
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])

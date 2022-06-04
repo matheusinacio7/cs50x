@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun  4 00:15:02 2022
+# Make data base, printed on Sat Jun  4 15:44:42 2022
 
 # Variables
 
@@ -51,7 +51,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/code
 # environment
-JOURNAL_STREAM = 8:60756
+JOURNAL_STREAM = 8:63038
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -73,11 +73,11 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-MANAGERPID = 2486
+MANAGERPID = 2661
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a1f686f1-3ecf-4d37-ac1a-19606c043264.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-2377c34b-2b5c-4395-967b-632a39897093.sock
 # environment
 LC_NAME = pt_BR.UTF-8
 # environment
@@ -91,7 +91,7 @@ GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/matheus-at-sitemate:@/tmp/.ICE-unix/2709,unix/matheus-at-sitemate:/tmp/.ICE-unix/2709
+SESSION_MANAGER = local/matheus-at-sitemate:@/tmp/.ICE-unix/2890,unix/matheus-at-sitemate:/tmp/.ICE-unix/2890
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -105,7 +105,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 2ac8d62af22349fa8e32c8de733705a4
+INVOCATION_ID = 6b38793d5a0b477d821ef25a6be4b0a8
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -127,7 +127,7 @@ PWD = /home/heyset/cs50/week-4-memory/pset/filter-less
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 2671
+SSH_AGENT_PID = 2852
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -189,7 +189,7 @@ LC_TELEPHONE = pt_BR.UTF-8
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /home/heyset/cs50/week-4-memory
+OLDPWD = /home/heyset
 # default
 .VARIABLES := 
 # automatic
@@ -211,6 +211,8 @@ GDK_BACKEND = x11
 # environment
 LC_PAPER = pt_BR.UTF-8
 # environment
+NO_AT_BRIDGE = 1
+# environment
 QT_ACCESSIBILITY = 1
 # environment
 XMODIFIERS = @im=ibus
@@ -231,11 +233,11 @@ LC_ALL = C
 # environment
 P9K_TTY = old
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/6eba80b3_1854_4d92_b743_75c2dc417a7c
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/e6e8d508_8503_45bd_912d_adc28edc1460
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.289
+GNOME_TERMINAL_SERVICE = :1.975
 # default
 SUFFIXES := 
 # environment
@@ -255,11 +257,11 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-_P9K_TTY = /dev/pts/0
+_P9K_TTY = /dev/pts/3
 # environment
-VSCODE_PID = 19255
+VSCODE_PID = 9050
 # variable set hash-table stats:
-# Load=123/1024=12%, Rehash=0, Collisions=21/146=14%
+# Load=124/1024=12%, Rehash=0, Collisions=21/147=14%
 
 # Pattern-specific Variable Values
 
@@ -267,9 +269,9 @@ VSCODE_PID = 19255
 
 # Directories
 
-# . (device 64770, inode 8521715): 11 files, no impossibilities.
+# . (device 64770, inode 8521715): 9 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -313,12 +315,12 @@ filter:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 15 / storage = 118 B / avg = 7 B
-# current buf: size = 8162 B / used = 118 B / count = 15 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 14 / storage = 107 B / avg = 7 B
+# current buf: size = 8162 B / used = 107 B / count = 14 / avg = 7 B
 
-# strcache performance: lookups = 21 / hit rate = 28%
+# strcache performance: lookups = 19 / hit rate = 26%
 # hash-table stats:
-# Load=15/8192=0%, Rehash=0, Collisions=1/21=5%
-# Finished Make data base on Sat Jun  4 00:15:02 2022
+# Load=14/8192=0%, Rehash=0, Collisions=1/19=5%
+# Finished Make data base on Sat Jun  4 15:44:42 2022
 
  
