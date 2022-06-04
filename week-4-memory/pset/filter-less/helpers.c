@@ -45,6 +45,16 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
+    int half_width = ceil((float) width / 2);
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < half_width; w++)
+        {
+            RGBTRIPLE swap = image[h][w];
+            image[h][w] = image[h][width -w -1];
+            image[h][width -w -1] = swap;
+        }
+    }
     return;
 }
 
