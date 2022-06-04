@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jun  4 14:16:12 2022
+# Make data base, printed on Sat Jun  4 15:15:13 2022
 
 # Variables
 
@@ -267,18 +269,15 @@ VSCODE_PID = 9050
 
 # Directories
 
-# . (device 64770, inode 8793890): 9 files, no impossibilities.
+# . (device 64770, inode 8793890): 11 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 # No implicit rules.
 
 # Files
- 
-make: *** No rule to make target 'all'.  Stop.
-
 
 # Not a target:
 all:
@@ -288,9 +287,10 @@ all:
 #  File has not been updated.
 
 # Not a target:
+ 
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-12-30 22:57:36
+#  Last modified 2022-06-04 15:15:04.965653471
 #  File has been updated.
 #  Successfully updated.
 
@@ -305,7 +305,7 @@ filter:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 2):
-	clang -ggdb3 -O0 -Qunused-arguments -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow -lm -o filter filter.c helpers.c
+	clang -g -ggdb3 -O0 -Qunused-arguments -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow -lm -o filter filter.c helpers.c
 
 # files hash-table stats:
 # Load=5/1024=0%, Rehash=0, Collisions=0/15=0%
@@ -315,12 +315,12 @@ filter:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 14 / storage = 107 B / avg = 7 B
-# current buf: size = 8162 B / used = 107 B / count = 14 / avg = 7 B
+# strcache buffers: 1 (0) / strings = 15 / storage = 118 B / avg = 7 B
+# current buf: size = 8162 B / used = 118 B / count = 15 / avg = 7 B
 
-# strcache performance: lookups = 19 / hit rate = 26%
+# strcache performance: lookups = 21 / hit rate = 28%
 # hash-table stats:
-# Load=14/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Sat Jun  4 14:16:12 2022
+# Load=15/8192=0%, Rehash=0, Collisions=1/21=5%
+# Finished Make data base on Sat Jun  4 15:15:13 2022
 
  
