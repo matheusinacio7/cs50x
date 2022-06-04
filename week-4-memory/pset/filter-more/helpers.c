@@ -111,6 +111,7 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             image[h][w].rgbtBlue = clamp_color(get_rounded_square_root_of_squares(gxSum[2], gySum[2]));
         }
     }
+    free(original_image);
     return;
 }
 
