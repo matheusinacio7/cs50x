@@ -25,7 +25,8 @@ int gy_kernel[3][3] =
 BYTE clamp_color(int target);
 RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width]);
 int calculate_weighted_box_sum(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
-                               int sum[3], char weight_kernel);
+                               int sum[3], char weight_kernel_code);
+int *get_kernel(char kernel_code);
 void copy_image(int height, int width, RGBTRIPLE original[height][width], RGBTRIPLE copy[height][width]);
 
 // Convert image to grayscale
@@ -90,12 +91,12 @@ RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGB
     return average;
 }
 
-// weight_kernel is d for default, x for gx and y for gy
+// weight_kernel_code is 'd' for default, 'x' for gx and 'y' for gy
 int calculate_weighted_box_sum(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
-                               int sum[3], char weight_kernel)
+                               int sum[3], char weight_kernel_code)
 {
     int count = 0;
-    int (*kernel)[3][3] = &default_kernel;
+    int (*kernel)[3][3] = get_kernel(weight_kernel_code);
 
     for (int j = 0; j < 3; j++)
     {
@@ -118,6 +119,24 @@ int calculate_weighted_box_sum(int height, int width, int center_h, int center_w
         }
     }
     return count;
+}
+
+int *get_kernel(char kernel_code)
+{
+    if (kernel_code == 'd')
+    {
+        return &default_kernel;
+    }
+
+    if (kernel_code == 'x')
+    {
+        return &gx_kernel;
+    }
+
+    if (kernel_code == 'y')
+    {
+        return &gy_kernel;
+    }
 }
 
 // Detect edges
