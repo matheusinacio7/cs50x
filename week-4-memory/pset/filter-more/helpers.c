@@ -6,6 +6,7 @@
 BYTE clamp_color(int target);
 RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
                           RGBTRIPLE original_image[height][width]);
+void copy_image(int height, int width, RGBTRIPLE original[height][width], RGBTRIPLE copy[height][width]);
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -44,15 +45,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     RGBTRIPLE(*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
-
-    for (int h = 0; h < height; h++)
-    {
-        for (int w = 0; w < width; w++)
-        {
-            RGBTRIPLE pixel = image[h][w];
-            original_image[h][w] = image[h][w];
-        }
-    }
+    copy_image(height, width, image, original_image);
 
     for (int h = 0; h < height; h++)
     {
@@ -102,6 +95,17 @@ RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGB
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
     return;
+}
+
+void copy_image(int height, int width, RGBTRIPLE original[height][width], RGBTRIPLE copy[height][width])
+{
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            copy[h][w] = original[h][w];
+        }
+    }
 }
 
 BYTE clamp_color(int target)
