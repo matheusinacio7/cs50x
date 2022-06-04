@@ -1,5 +1,6 @@
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "helpers.h"
 
 BYTE clamp_color(int target);
@@ -50,13 +51,14 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    RGBTRIPLE original_image[height][width];
+    RGBTRIPLE (*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
 
     for (int h = 0; h < height; h++)
     {
         for (int w = 0; w < width; w++)
         {
-            original_image[height][width] = image[height][width];
+            RGBTRIPLE pixel = image[h][w];
+            original_image[h][w] = image[h][w];
         }
     }
 
@@ -91,6 +93,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
             image[h][w].rgbtBlue = round((float) blueSum / count);
         }
     }
+    free(original_image);
     return;
 }
 
