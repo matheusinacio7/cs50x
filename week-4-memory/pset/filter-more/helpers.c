@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "helpers.h"
 
+BYTE clamp_color(int target);
 RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
                           RGBTRIPLE original_image[height][width]);
 
@@ -102,3 +103,17 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
 {
     return;
 }
+
+BYTE clamp_color(int target)
+{
+    if (target > 255)
+    {
+        return 255;
+    }
+    if (target < 0)
+    {
+        return 0;
+    }
+    return target;
+}
+
