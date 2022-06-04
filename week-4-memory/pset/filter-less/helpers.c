@@ -4,7 +4,8 @@
 #include "helpers.h"
 
 BYTE clamp_color(int target);
-RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width], RGBTRIPLE original_image[height][width]);
+RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
+                          RGBTRIPLE original_image[height][width]);
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -51,8 +52,8 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         for (int w = 0; w < half_width; w++)
         {
             RGBTRIPLE swap = image[h][w];
-            image[h][w] = image[h][width -w -1];
-            image[h][width -w -1] = swap;
+            image[h][w] = image[h][width - w - 1];
+            image[h][width - w - 1] = swap;
         }
     }
     return;
@@ -61,7 +62,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
-    RGBTRIPLE (*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
+    RGBTRIPLE(*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
 
     for (int h = 0; h < height; h++)
     {
@@ -83,7 +84,8 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     return;
 }
 
-RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width], RGBTRIPLE original_image[height][width])
+RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
+                          RGBTRIPLE original_image[height][width])
 {
     int redSum = 0;
     int greenSum = 0;
