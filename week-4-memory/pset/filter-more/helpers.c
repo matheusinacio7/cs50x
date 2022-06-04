@@ -65,14 +65,16 @@ RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGB
     int greenSum = 0;
     int blueSum = 0;
     int count = 0;
-    for (int h = center_h - 1; h <= center_h + 1; h++)
+    for (int j = -1; j <= 1; j++)
     {
+        int h = center_h + j;
         if (h < 0 || h > height - 1)
         {
             continue;
         }
-        for (int w = center_w - 1; w <= center_w + 1; w++)
+        for (int i = -1; i <= 1; i++)
         {
+            int w = center_w + i;
             if (w < 0 || w > width - 1)
             {
                 continue;
@@ -94,6 +96,9 @@ RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGB
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE(*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
+    copy_image(height, width, image, original_image);
+
     return;
 }
 
