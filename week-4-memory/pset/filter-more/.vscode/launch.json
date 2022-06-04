@@ -5,7 +5,7 @@
     "type": "cppdbg",
     "request": "launch",
     "program": "${workspaceFolder}/filter",
-    "args": ["-b", "images/courtyard.bmp", "output.bmp"],
+    "args": ["-e", "images/courtyard.bmp", "output.bmp"],
     "stopAtEntry": false,
     "cwd": "${fileDirname}",
     "environment": [],

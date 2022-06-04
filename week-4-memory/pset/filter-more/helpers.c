@@ -26,7 +26,8 @@ BYTE clamp_color(int target);
 RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width]);
 int calculate_weighted_box_sum(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
                                int sum[3], char weight_kernel_code);
-int *get_kernel(char kernel_code);
+int get_rounded_square_root_of_squares(int a, int b);
+void get_kernel(char kernel_code, int (**kernel_ptr)[3][3]);
 void copy_image(int height, int width, RGBTRIPLE original[height][width], RGBTRIPLE copy[height][width]);
 
 // Convert image to grayscale
@@ -91,12 +92,42 @@ RGBTRIPLE get_box_average(int height, int width, int center_h, int center_w, RGB
     return average;
 }
 
+// Detect edges
+void edges(int height, int width, RGBTRIPLE image[height][width])
+{
+    RGBTRIPLE(*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
+    copy_image(height, width, image, original_image);
+
+    for (int h = 0; h < height; h++)
+    {
+        for (int w = 0; w < width; w++)
+        {
+            int gxSum[3] = { 0, 0, 0 };
+            int gySum[3] = { 0, 0, 0 };
+            calculate_weighted_box_sum(height, width, h, w, original_image, gxSum, 'x');
+            calculate_weighted_box_sum(height, width, h, w, original_image, gySum, 'y');
+            image[h][w].rgbtRed = clamp_color(get_rounded_square_root_of_squares(gxSum[0], gySum[0]));
+            image[h][w].rgbtGreen = clamp_color(get_rounded_square_root_of_squares(gxSum[1], gySum[1]));
+            image[h][w].rgbtBlue = clamp_color(get_rounded_square_root_of_squares(gxSum[2], gySum[2]));
+        }
+    }
+    return;
+}
+
+int get_rounded_square_root_of_squares(int a, int b)
+{
+    int squares_sum = pow(a, 2) + pow(b, 2);
+    float root = sqrt(squares_sum);
+    return round(root);
+}
+
 // weight_kernel_code is 'd' for default, 'x' for gx and 'y' for gy
 int calculate_weighted_box_sum(int height, int width, int center_h, int center_w, RGBTRIPLE image[height][width],
                                int sum[3], char weight_kernel_code)
 {
     int count = 0;
-    int (*kernel)[3][3] = get_kernel(weight_kernel_code);
+    int (*kernel)[3][3] = NULL;
+    get_kernel(weight_kernel_code, &kernel);
 
     for (int j = 0; j < 3; j++)
     {
@@ -121,31 +152,25 @@ int calculate_weighted_box_sum(int height, int width, int center_h, int center_w
     return count;
 }
 
-int *get_kernel(char kernel_code)
+void get_kernel(char kernel_code, int (**kernel_ptr)[3][3])
 {
     if (kernel_code == 'd')
     {
-        return &default_kernel;
+        *kernel_ptr = &default_kernel;
+        return;
     }
 
     if (kernel_code == 'x')
     {
-        return &gx_kernel;
+        *kernel_ptr = &gx_kernel;
+        return;
     }
 
     if (kernel_code == 'y')
     {
-        return &gy_kernel;
+        *kernel_ptr = &gy_kernel;
+        return;
     }
-}
-
-// Detect edges
-void edges(int height, int width, RGBTRIPLE image[height][width])
-{
-    RGBTRIPLE(*original_image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
-    copy_image(height, width, image, original_image);
-
-    return;
 }
 
 void copy_image(int height, int width, RGBTRIPLE original[height][width], RGBTRIPLE copy[height][width])
