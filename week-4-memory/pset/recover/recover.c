@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 
 typedef uint8_t BYTE;
 #define BLOCK_SIZE 512
 
 void print_usage_reminder(void);
+int write_file(int *countptr, FILE *infile, BYTE chunk[BLOCK_SIZE]);
  
 int main(int argc, char *argv[])
 {
@@ -16,30 +18,50 @@ int main(int argc, char *argv[])
     }
 
     char *filename = argv[1];
-    FILE *file = fopen(filename, "r");
+    FILE *infile = fopen(filename, "r");
 
-    if (file == NULL)
+    if (infile == NULL)
     {
-        fclose(file);
         printf("Could not open file %s.\n", filename);
         return 3;
     }
 
     BYTE chunk[BLOCK_SIZE];
-    int jpg_count = 0;
+    int count = 0;
+    int *countptr = &count;
+    char *padding = "000";
 
-    while (fread(&chunk, sizeof(BYTE), BLOCK_SIZE, file) == BLOCK_SIZE)
+    fread(&chunk, sizeof(BYTE), BLOCK_SIZE, infile);
+
+    while (write_file(countptr, infile, chunk)) {
+        //
+    }
+
+    fclose(infile);
+}
+
+int write_file(int *countptr, FILE *infile, BYTE chunk[BLOCK_SIZE])
+{
+    char *padding = "000";
+    char strfilecount[4];
+    sprintf(strfilecount, "%d", *countptr);
+    char outfilename[10];
+    sprintf(outfilename, "%.*s%s.jpeg", 3 - (int) strlen(strfilecount), padding, strfilecount);
+
+    FILE *outfile = fopen(outfilename, "w");
+    fwrite(&chunk, sizeof(BYTE), 512, outfile);
+
+    while (fread(&chunk, sizeof(BYTE), BLOCK_SIZE, infile) == BLOCK_SIZE)
     {
         if (chunk[0] == 0xff && chunk[1] == 0xd8 && chunk[2] == 0xff & chunk[3] >> 4 == 0x0e)
         {
-            printf("%x %x %x %x\n", chunk[0], chunk[1], chunk[2], chunk[3]);
-            jpg_count += 1;
+            *countptr += 1;
+            fclose(outfile);
+            return 0;
         }
     }
-
-    printf("%i\n", jpg_count);
-
-    fclose(file);
+    fclose(outfile);
+    return 1;
 }
 
 void print_usage_reminder(void)
