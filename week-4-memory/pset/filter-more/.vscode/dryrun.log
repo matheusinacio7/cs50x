@@ -1,5 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory '/home/heyset/cs50/week-4-memory/pset/filter-more'
-make: 'filter' is up to date.
-make: Leaving directory '/home/heyset/cs50/week-4-memory/pset/filter-more'
- 
