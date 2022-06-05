@@ -28,40 +28,37 @@ int main(int argc, char *argv[])
 
     BYTE chunk[BLOCK_SIZE];
     int count = 0;
-    int *countptr = &count;
     char *padding = "000";
 
-    fread(&chunk, sizeof(BYTE), BLOCK_SIZE, infile);
-
-    while (write_file(countptr, infile, chunk)) {
-        //
-    }
-
-    fclose(infile);
-}
-
-int write_file(int *countptr, FILE *infile, BYTE chunk[BLOCK_SIZE])
-{
-    char *padding = "000";
-    char strfilecount[4];
-    sprintf(strfilecount, "%d", *countptr);
-    char outfilename[10];
-    sprintf(outfilename, "%.*s%s.jpeg", 3 - (int) strlen(strfilecount), padding, strfilecount);
-
-    FILE *outfile = fopen(outfilename, "w");
-    fwrite(&chunk, sizeof(BYTE), 512, outfile);
+    FILE *outfile = NULL;
 
     while (fread(&chunk, sizeof(BYTE), BLOCK_SIZE, infile) == BLOCK_SIZE)
     {
         if (chunk[0] == 0xff && chunk[1] == 0xd8 && chunk[2] == 0xff & chunk[3] >> 4 == 0x0e)
         {
-            *countptr += 1;
-            fclose(outfile);
-            return 0;
+            if (outfile != NULL)
+            {
+                fclose(outfile);
+            }
+
+            char *padding = "000";
+            char strfilecount[4];
+            sprintf(strfilecount, "%d", count);
+            char outfilename[10];
+            sprintf(outfilename, "%.*s%s.jpg", 3 - (int) strlen(strfilecount), padding, strfilecount);
+
+            outfile = fopen(outfilename, "w");
+            count += 1;
+        }
+
+        if (outfile != NULL)
+        {
+            fwrite(&chunk, sizeof(BYTE), 512, outfile);
         }
     }
+    fclose(infile);
     fclose(outfile);
-    return 1;
+    return 0;
 }
 
 void print_usage_reminder(void)
