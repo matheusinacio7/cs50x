@@ -20,6 +20,7 @@ person *create_family(int generations);
 void print_family(person *p, int generation);
 void free_family(person *p);
 char random_allele();
+char get_random_allele_from_parent(person *parent);
 
 int main(void)
 {
@@ -39,7 +40,7 @@ int main(void)
 // Create a new individual with `generations`
 person *create_family(int generations)
 {
-    // TODO: Allocate memory for new person
+    person *individual = malloc(sizeof(person));
 
     // If there are still generations left to create
     if (generations > 1)
@@ -48,34 +49,39 @@ person *create_family(int generations)
         person *parent0 = create_family(generations - 1);
         person *parent1 = create_family(generations - 1);
 
-        // TODO: Set parent pointers for current person
+        individual->parents[0] = parent0;
+        individual->parents[1] = parent1;
 
-        // TODO: Randomly assign current person's alleles based on the alleles of their parents
-
+        individual->alleles[0] = get_random_allele_from_parent(individual->parents[0]);
+        individual->alleles[1] = get_random_allele_from_parent(individual->parents[1]);
     }
 
     // If there are no generations left to create
     else
     {
-        // TODO: Set parent pointers to NULL
+        individual->parents[0] = NULL;
+        individual->parents[1] = NULL;
 
-        // TODO: Randomly assign alleles
-
+        individual->alleles[0] = random_allele();
+        individual->alleles[1] = random_allele();
     }
 
-    // TODO: Return newly created person
-    return NULL;
+    return individual;
 }
 
 // Free `p` and all ancestors of `p`.
 void free_family(person *p)
 {
-    // TODO: Handle base case
+    if (p->parents[0] == NULL)
+    {
+        free(p);
+        return;
+    }
 
-    // TODO: Free parents recursively
+    free_family(p->parents[0]);
+    free_family(p->parents[1]);
 
-    // TODO: Free child
-
+    free(p);
 }
 
 // Print each family member and their alleles.
@@ -132,4 +138,11 @@ char random_allele()
     {
         return 'O';
     }
+}
+
+char get_random_allele_from_parent(person *parent)
+{
+    int i = rand() % 2;
+
+    return parent->alleles[i];
 }
