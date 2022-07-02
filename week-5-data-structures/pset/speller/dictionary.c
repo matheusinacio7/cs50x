@@ -19,6 +19,8 @@ node;
 bool insert_word(char *word);
 bool insert_next(node *prev, char *word, int index);
 void free_node(node *n);
+bool check_linked_list(node *n, const char *word);
+bool is_same_word_case_insensitive(char *w1, const char *w2);
 
 // TODO: Choose number of buckets in hash table
 const unsigned int N = 26;
@@ -31,8 +33,41 @@ node *table;
 // Returns true if word is in dictionary, else false
 bool check(const char *word)
 {
-    // TODO
-    return false;
+    int hash_i = hash(word);
+    return check_linked_list(&table[hash_i], word);
+}
+
+bool check_linked_list(node *n, const char *word)
+{
+    if (is_same_word_case_insensitive(n->word, word))
+    {
+        return true;
+    }
+
+    if (n->next == NULL)
+    {
+        return false;
+    }
+
+    return check_linked_list(n->next, word);
+}
+
+bool is_same_word_case_insensitive(char *w1, const char *w2)
+{
+    if (strlen(w1) != strlen(w2))
+    {
+        return false;
+    }
+
+    for (int i = 0; i < strlen(w1); i++)
+    {
+        if (tolower(w1[i]) != tolower(w2[i]))
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 // Hashes word to a number
@@ -77,7 +112,6 @@ bool load(const char *dictionary)
     }
 
     fclose(dict);
-    free(table);
     return loaded;
 }
 
@@ -132,18 +166,20 @@ bool unload(void)
 {
     for (int i = 0; i < N; i++)
     {
-        free_node(&table[i]);
+        free_node(table[i].next);
     }
-    return false;
+
+    free(table);
+    return true;
 }
 
 void free_node(node *n)
 {
-    if (n->next == NULL)
+    if (n == NULL)
     {
-        free(n);
         return;
     }
 
     free_node(n->next);
+    free(n);
 }
