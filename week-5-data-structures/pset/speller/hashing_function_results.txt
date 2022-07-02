@@ -1,0 +1,18 @@
+#1 FIRST LETTER ASCII CODE
+
+BUCKETS: 26
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 18:  used 15615 times
+    bucket 2:  used 13042 times
+    bucket 0:  used 9128 times
+LEAST USED BUCKETS:
+    bucket 23:  used 121 times
+    bucket 25:  used 348 times
+    bucket 24:  used 365 times
+
+code:
+unsigned int hash(const char *word)
+{
+    return toupper(word[0]) - 'A';
+}
