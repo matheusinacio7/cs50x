@@ -24,8 +24,7 @@ bool is_same_word_case_insensitive(char *w1, const char *w2);
 
 int count_bucket_usage(node *n, int rolling_count);
 
-// TODO: Choose number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = 10000;
 
 int dict_word_count = 0;
 
@@ -73,10 +72,47 @@ bool is_same_word_case_insensitive(char *w1, const char *w2)
 }
 
 // Hashes word to a number
+// Some theoretical references:
+// https://opendsa-server.cs.vt.edu/ODSA/Books/CS3/html/HashFuncExamp.html (and other pages)
+// https://kottke.org/17/07/the-distribution-of-letters-in-english-words
 unsigned int hash(const char *word)
 {
-    // TODO: Improve this hash function
-    return toupper(word[0]) - 'A';
+    int wlen = strlen(word);
+
+    __u_long sum = 0;
+    for (int i = 0; i < wlen; i++)
+    {
+        sum += word[i] * word[i] * word[i];
+    }
+
+    char as_word[15];
+    sprintf(as_word, "%lu", sum);
+    int digit_count = strlen(as_word);
+
+    int result;
+
+    if (digit_count > 5)
+    {
+        int discarded_digit_count = digit_count - 5;
+        int discarded_half = discarded_digit_count / 2;
+
+        char result_str[6];
+        result_str[5] = '\0';
+
+        for (int i = 0; i < 5; i++)
+        {
+            result_str[i] = as_word[i + discarded_half];
+        }
+
+        result = atoi(result_str);
+    }
+    else
+    {
+        result = sum;
+    }
+
+
+    return result % N;
 }
 
 // Loads dictionary into memory, returning true if successful, else false
