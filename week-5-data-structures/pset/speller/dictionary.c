@@ -206,7 +206,8 @@ void benchmark(void)
     int most_used_buckets[3][2];
     int least_used_buckets[3][2];
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
+    {
         most_used_buckets[i][0] = 99;
         most_used_buckets[i][1] = 0;
 
