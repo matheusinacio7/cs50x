@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -6,12 +8,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  1 16:55:01 2022
+# Make data base, printed on Sat Jul  2 13:12:55 2022
 
 # Variables
 
-# environment
-VSCODE_GIT_ASKPASS_MAIN = /usr/share/code/resources/app/extensions/git/dist/askpass-main.js
 # 'override' directive
 GNUMAKEFLAGS := 
 # automatic
@@ -49,7 +49,9 @@ VTE_VERSION = 6003
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:60318
+_ = /usr/bin/code
+# environment
+JOURNAL_STREAM = 8:63688
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # makefile (from 'Makefile', line 1)
@@ -71,13 +73,11 @@ DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-_ = /usr/bin/code
-# environment
-MANAGERPID = 2564
+MANAGERPID = 2610
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0da7a7c4-4864-4c84-ab55-5cd902a783b6.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0ebec3e4-5063-47f7-bf8e-ac3963af07c5.sock
 # environment
 LC_NAME = pt_BR.UTF-8
 # environment
@@ -85,13 +85,13 @@ VSCODE_CWD = /home/heyset/cs50/week-5-data-structures/pset/speller
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/heyset/.nvm/versions/node/v12.22.10/bin:/home/heyset/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/linuxbrew/.linuxbrew:/home/heyset/.local/bin:/home/heyset/.java/jdk-17/bin:/home/heyset/Apps/mupdf/mupdf-1.19.0-source:/home/heyset/.airplane/bin:/home/heyset/go/compileretc/bin:/home/heyset/java/jre1.8.0_333/bin:/home/heyset/mupdf/mupdf-1.20.0-source/build/release:/home/linuxbrew/.linuxbrew:/home/heyset/.local/bin:/home/heyset/.java/jdk-17/bin:/home/heyset/Apps/mupdf/mupdf-1.19.0-source:/home/heyset/.airplane/bin:/home/heyset/go/compileretc/bin:/home/heyset/java/jre1.8.0_333/bin:/home/heyset/mupdf/mupdf-1.20.0-source/build/release:/home/linuxbrew/.linuxbrew:/home/heyset/.local/bin:/home/heyset/.java/jdk-17/bin:/home/heyset/Apps/mupdf/mupdf-1.19.0-source:/home/heyset/.airplane/bin:/home/heyset/go/compileretc/bin:/home/heyset/java/jre1.8.0_333/bin:/home/heyset/mupdf/mupdf-1.20.0-source/build/release
+PATH = /home/heyset/.nvm/versions/node/v12.22.10/bin:/home/heyset/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/linuxbrew/.linuxbrew:/home/heyset/.local/bin:/home/heyset/.java/jdk-17/bin:/home/heyset/Apps/mupdf/mupdf-1.19.0-source:/home/heyset/.airplane/bin:/home/heyset/go/compileretc/bin:/home/heyset/java/jre1.8.0_333/bin:/home/heyset/mupdf/mupdf-1.20.0-source/build/release
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-SESSION_MANAGER = local/matheus-at-sitemate:@/tmp/.ICE-unix/2850,unix/matheus-at-sitemate:/tmp/.ICE-unix/2850
+SESSION_MANAGER = local/matheus-at-sitemate:@/tmp/.ICE-unix/2843,unix/matheus-at-sitemate:/tmp/.ICE-unix/2843
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -105,7 +105,7 @@ VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 570f33a1ea6f4a879b7d91bbe7750367
+INVOCATION_ID = 43c28de937f6425ebfe0efbcde30fa9b
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -127,9 +127,9 @@ PWD = /home/heyset/cs50/week-5-data-structures/pset/speller
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 2813
+SSH_AGENT_PID = 2806
 # environment
-ORIGINAL_XDG_CURRENT_DESKTOP = Unity
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
 GTK_MODULES = gail:atk-bridge
 # environment
@@ -143,7 +143,7 @@ VSCODE_CODE_CACHE_PATH = /home/heyset/.config/Code/CachedData/30d9c6cd9483b2cc58
 # environment
 LOGNAME = heyset
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 NVM_CD_FLAGS = -q
 # automatic
@@ -159,8 +159,6 @@ GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # environment
 LC_TIME = pt_BR.UTF-8
 # environment
-VSCODE_GIT_IPC_HANDLE = /run/user/1000/vscode-git-a23247ce85.sock
-# environment
 COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
@@ -169,7 +167,7 @@ MAKECMDGOALS := all
 # environment
 QT_IM_MODULE = ibus
 # environment
-SHLVL = 3
+SHLVL = 1
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # default
@@ -191,27 +189,19 @@ LC_TELEPHONE = pt_BR.UTF-8
 # default
 MAKE_COMMAND := make
 # environment
-OLDPWD = /home/heyset/cs50/week-5-data-structures/pset
-# environment
-VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
-# environment
-TERM_PROGRAM = vscode
+OLDPWD = /home/heyset
 # default
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
 # environment
 VSCODE_IPC_HOOK = /run/user/1000/vscode-6172ee39-1.68.1-main.sock
-# environment
-VSCODE_GIT_ASKPASS_NODE = /usr/share/code/code
 # makefile
 MAKEFLAGS = pqrR
 # environment
 MFLAGS = -pqrR
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
-# environment
-TERM_PROGRAM_VERSION = 1.68.1
 # environment
 NVM_DIR = /home/heyset/.nvm
 # automatic
@@ -226,8 +216,6 @@ QT_ACCESSIBILITY = 1
 XMODIFIERS = @im=ibus
 # environment
 DEFAULTS_PATH = /usr/share/gconf/ubuntu.default.path
-# environment
-GIT_ASKPASS = /usr/share/code/resources/app/extensions/git/dist/askpass.sh
 # default
 MAKEFILES := 
 # environment
@@ -243,11 +231,11 @@ LC_ALL = C
 # environment
 P9K_TTY = old
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/32f9f711_f662_4201_a3de_5d37d979c798
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/05350bfb_82bc_495a_891a_03c6246b38e3
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.315
+GNOME_TERMINAL_SERVICE = :1.150
 # default
 SUFFIXES := 
 # environment
@@ -267,18 +255,15 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-_P9K_TTY = /dev/pts/1
+_P9K_TTY = /dev/pts/0
 # environment
-VSCODE_PID = 16483
+VSCODE_PID = 8109
 # variable set hash-table stats:
-# Load=130/1024=13%, Rehash=0, Collisions=22/153=14%
+# Load=123/1024=12%, Rehash=0, Collisions=21/146=14%
 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
- 
-make: *** No rule to make target 'all'.  Stop.
-
 
 # Directories
 
@@ -306,6 +291,7 @@ Makefile:
 #  File has been updated.
 #  Successfully updated.
 
+ 
 speller:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -335,6 +321,6 @@ speller:
 # strcache performance: lookups = 21 / hit rate = 23%
 # hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/21=5%
-# Finished Make data base on Fri Jul  1 16:55:01 2022
+# Finished Make data base on Sat Jul  2 13:12:55 2022
 
  
