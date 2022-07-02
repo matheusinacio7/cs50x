@@ -1,13 +1,15 @@
 texts/Shakespeare
 
-WORDS MISSPELLED:     243564
+mine
+
+WORDS MISSPELLED:     45691
 WORDS IN DICTIONARY:  143091
 WORDS IN TEXT:        904612
-TIME IN load:         0.14
-TIME IN check:        1.30
+TIME IN load:         0.13
+TIME IN check:        1.00
 TIME IN size:         0.00
 TIME IN unload:       0.03
-TIME IN TOTAL:        1.48
+TIME IN TOTAL:        1.16
 
 staff
 
@@ -20,3 +22,28 @@ TIME IN size:         0.00
 TIME IN unload:       0.02
 TIME IN TOTAL:        0.50
 
+
+
+texts/stain
+
+mine
+
+WORDS MISSPELLED:     2534
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        89361
+TIME IN load:         0.12
+TIME IN check:        0.10
+TIME IN size:         0.00
+TIME IN unload:       0.03
+TIME IN TOTAL:        0.25
+
+staff
+
+WORDS MISSPELLED:     2534
+WORDS IN DICTIONARY:  143091
+WORDS IN TEXT:        89361
+TIME IN load:         0.03
+TIME IN check:        0.04
+TIME IN size:         0.00
+TIME IN unload:       0.02
+TIME IN TOTAL:        0.09

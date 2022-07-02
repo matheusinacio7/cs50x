@@ -82,7 +82,8 @@ unsigned int hash(const char *word)
     __u_long sum = 0;
     for (int i = 0; i < wlen; i++)
     {
-        sum += word[i] * word[i] * word[i];
+        char lower_c = tolower(word[i]);
+        sum += lower_c * lower_c * lower_c;
     }
 
     char as_word[15];

@@ -9,7 +9,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${fileDirname}/${fileBasenameNoExtension}",
-      "args": ["dictionaries/small", "texts/aaaa.txt"],
+      "args": ["dictionaries/yeah", "texts/aaaa.txt"],
       "cwd": "${fileDirname}"
       // "preLaunchTask": "C/C++: gcc build active file include cs50"
     }
