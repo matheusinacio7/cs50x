@@ -22,6 +22,8 @@ void free_node(node *n);
 bool check_linked_list(node *n, const char *word);
 bool is_same_word_case_insensitive(char *w1, const char *w2);
 
+int count_bucket_usage(node *n, int rolling_count);
+
 // TODO: Choose number of buckets in hash table
 const unsigned int N = 26;
 
@@ -160,6 +162,93 @@ unsigned int size(void)
 {
     return dict_word_count;
 }
+
+void benchmark(void)
+{
+    printf("BUCKETS: %i\n", N);
+    int unused_buckets = 0;
+    int most_used_buckets[3][2];
+    int least_used_buckets[3][2];
+
+    for (int i = 0; i < 3; i++) {
+        most_used_buckets[i][0] = 99;
+        most_used_buckets[i][1] = 0;
+
+        least_used_buckets[i][0] = 99;
+        least_used_buckets[i][1] = __INT_MAX__;
+    }
+
+    for (int b = 0; b < N; b++)
+    {
+        if (table[b].word[0] == '\000')
+        {
+            unused_buckets++;
+            continue;
+        }
+
+        int bucket_count = count_bucket_usage(&table[b], 0);
+        for (int i = 0; i < 3; i++)
+        {
+            if (bucket_count > most_used_buckets[i][1])
+            {
+                int swap[2];
+                swap[0] = most_used_buckets[i][0];
+                swap[1] = most_used_buckets[i][1];
+
+                most_used_buckets[i][0] = b;
+                most_used_buckets[i][1] = bucket_count;
+                if (i != 2)
+                {
+                    most_used_buckets[i + 1][0] = swap[0];
+                    most_used_buckets[i + 1][1] = swap[1];
+                }
+                break;
+            }
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (bucket_count < least_used_buckets[i][1])
+            {
+                int swap[2];
+                swap[0] = least_used_buckets[i][0];
+                swap[1] = least_used_buckets[i][1];
+
+                least_used_buckets[i][0] = b;
+                least_used_buckets[i][1] = bucket_count;
+                if (i != 2)
+                {
+                    least_used_buckets[i + 1][0] = swap[0];
+                    least_used_buckets[i + 1][1] = swap[1];
+                }
+                break;
+            }
+        }
+    }
+
+    printf("UNUSED BUCKETS: %i\n", unused_buckets);
+    printf("MOST USED BUCKETS:\n");
+    for (int i = 0; i < 3; i++)
+    {
+        printf("    bucket %i:  used %i times\n", most_used_buckets[i][0], most_used_buckets[i][1]);
+    }
+    printf("LEAST USED BUCKETS:\n");
+    for (int i = 0; i < 3; i++)
+    {
+        printf("    bucket %i:  used %i times\n", least_used_buckets[i][0], least_used_buckets[i][1]);
+    }
+}
+
+int count_bucket_usage(node *n, int rolling_count)
+{
+    if (n == NULL)
+    {
+        return rolling_count;
+    }
+
+    return count_bucket_usage(n->next, rolling_count + 1);
+}
+
 
 // Unloads dictionary from memory, returning true if successful, else false
 bool unload(void)

@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Jul  2 13:12:55 2022
+# Make data base, printed on Sat Jul  2 15:19:54 2022
 
 # Variables
 
@@ -69,6 +69,8 @@ MANDATORY_PATH = /usr/share/gconf/ubuntu.mandatory.path
 # environment
 XDG_DATA_DIRS = /usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
 # environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
 DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
 # environment
 VSCODE_VERBOSE_LOGGING = true
@@ -82,6 +84,8 @@ VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-0ebec3e4-5063-47f7-bf8e-ac39
 LC_NAME = pt_BR.UTF-8
 # environment
 VSCODE_CWD = /home/heyset/cs50/week-5-data-structures/pset/speller
+# environment
+GOPROXY = https://proxy.golang.org,direct
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -96,6 +100,8 @@ SESSION_MANAGER = local/matheus-at-sitemate:@/tmp/.ICE-unix/2843,unix/matheus-at
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
 LC_MONETARY = pt_BR.UTF-8
+# environment
+GOPATH = /home/heyset/go
 # environment
 NVM_BIN = /home/heyset/.nvm/versions/node/v12.22.10/bin
 # environment
@@ -133,7 +139,7 @@ ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
 GTK_MODULES = gail:atk-bridge
 # environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+GOMODCACHE = /home/heyset/go/pkg/mod
 # environment
 HOME = /home/heyset
 # environment
@@ -259,7 +265,7 @@ _P9K_TTY = /dev/pts/0
 # environment
 VSCODE_PID = 8109
 # variable set hash-table stats:
-# Load=123/1024=12%, Rehash=0, Collisions=21/146=14%
+# Load=126/1024=12%, Rehash=0, Collisions=22/149=15%
 
 # Pattern-specific Variable Values
 
@@ -267,12 +273,13 @@ VSCODE_PID = 8109
 
 # Directories
 
-# . (device 64770, inode 25821436): 11 files, no impossibilities.
+# . (device 64770, inode 25821436): 15 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
+ 
 # No implicit rules.
 
 # Files
@@ -287,11 +294,10 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-06-18 01:16:52
+#  Last modified 2022-07-02 15:19:35.523298816
 #  File has been updated.
 #  Successfully updated.
 
- 
 speller:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -307,20 +313,29 @@ speller:
 #  Modification time never checked.
 #  File has not been updated.
 
+load_dict:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 7):
+	clang -ggdb3 -gdwarf-4 -O0 -Qunused-arguments -std=c11 -Wall -Werror -Wextra -Wno-gnu-folding-constant -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow -c -o load_dict.o load_dict.c
+	clang -ggdb3 -gdwarf-4 -O0 -Qunused-arguments -std=c11 -Wall -Werror -Wextra -Wno-gnu-folding-constant -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow -c -o dictionary.o dictionary.c
+	clang -ggdb3 -gdwarf-4 -O0 -Qunused-arguments -std=c11 -Wall -Werror -Wextra -Wno-gnu-folding-constant -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow -o load_dict load_dict.o dictionary.o -lm
+
 # files hash-table stats:
-# Load=5/1024=0%, Rehash=0, Collisions=0/15=0%
+# Load=6/1024=1%, Rehash=0, Collisions=0/16=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 16 / storage = 136 B / avg = 8 B
-# current buf: size = 8162 B / used = 136 B / count = 16 / avg = 8 B
+# strcache buffers: 1 (0) / strings = 20 / storage = 183 B / avg = 9 B
+# current buf: size = 8162 B / used = 183 B / count = 20 / avg = 9 B
 
-# strcache performance: lookups = 21 / hit rate = 23%
+# strcache performance: lookups = 27 / hit rate = 25%
 # hash-table stats:
-# Load=16/8192=0%, Rehash=0, Collisions=1/21=5%
-# Finished Make data base on Sat Jul  2 13:12:55 2022
+# Load=20/8192=0%, Rehash=0, Collisions=1/27=4%
+# Finished Make data base on Sat Jul  2 15:19:54 2022
 
  
