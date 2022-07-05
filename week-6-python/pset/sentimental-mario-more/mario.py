@@ -9,4 +9,4 @@ for i in range(1, height + 1):
     block = '#'
     space = ' '
     spacing = height - i
-    print(f'{space * spacing}{block * i}{space}{block * i}')
+    print(f'{space * spacing}{block * i}{space * 2}{block * i}')
