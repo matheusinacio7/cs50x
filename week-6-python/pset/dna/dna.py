@@ -30,9 +30,9 @@ def get_match(db_reader, sequence):
 
 def person_matches(sequence, subsequences, person):
     for subsequence in subsequences:
-            sub_match = longest_match(sequence, subsequence)
-            if int(person[subsequence]) != sub_match:
-                return False
+        sub_match = longest_match(sequence, subsequence)
+        if int(person[subsequence]) != sub_match:
+            return False
     
     return True
 
