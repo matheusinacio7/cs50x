@@ -227,4 +227,5 @@ SELECT *
 
 --  4|LGA|LaGuardia Airport|New York City
 
--- Bruce is a higher suspect due to day of leaving
+-- Bruce is a higher suspect due to day of leaving within 10 minutes
+-- AH.. Taylor left after 20 minutes lol, so its Bruce :)
