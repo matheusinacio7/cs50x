@@ -26,7 +26,12 @@
             <div class="section">
                 <h2>Part 2: Free Response</h2>
                 <hr>
-                <!-- TODO: Add free response question here -->
+                <h3>What country has a unicorn as part of its national emblem?</h3>
+                <p id="free-result"></p>
+                <form id="free-form">
+                    <input id="free-input" type="text" class="text" placeholder="What's your best guess?">
+                    <input type="submit" value="Confirm">
+                </form>
             </div>
         </div>
     </body>
@@ -35,7 +40,7 @@
         document.querySelectorAll('.multiple-incorrect').forEach((el) => {
             el.addEventListener('click', () => {
                 el.style.backgroundColor = '#f88';
-                multipleResultParagraph.innerText = 'Incorrect!';
+                multipleResultParagraph.innerText = 'Incorrect';
                 multipleResultParagraph.style.color = '#944';
             });
         });
@@ -44,6 +49,20 @@
             el.target.style.backgroundColor = '#8f8';
                 multipleResultParagraph.innerText = 'Correct!';
                 multipleResultParagraph.style.color = '#494';
+        });
+
+        const freeResultParagraph = document.getElementById('free-result');
+        const freeTextInput = document.getElementById('free-input');
+        document.getElementById('free-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userAnswer = freeTextInput.value;
+            if (userAnswer.toLowerCase() === 'scotland') {
+                freeResultParagraph.style.color = '#494';
+                freeResultParagraph.innerText = 'Correct!';
+            } else {
+                freeResultParagraph.style.color = '#944';
+                freeResultParagraph.innerText = 'Incorrect';
+            }
         });
     </script>
 </html>

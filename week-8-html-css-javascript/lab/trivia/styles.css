@@ -32,10 +32,10 @@ body {
     transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
 }
 
-#multiple-result {
+#multiple-result, #free-result {
     font-weight: bold;
     font-size: 1.125rem;
-    height: 28px;
+    height: 24px;
 }
 
 h1 {
