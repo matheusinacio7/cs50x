@@ -5,9 +5,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
         <title>Trivia!</title>
-        <script>
-            // TODO: Add code to check answers to questions
-        </script>
     </head>
     <body>
         <div class="header">
@@ -18,7 +15,12 @@
             <div class="section">
                 <h2>Part 1: Multiple Choice </h2>
                 <hr>
-                <!-- TODO: Add multiple choice question here -->
+                <h3>In 2004, what was discovered on the island of Flores in Indonesia?</h3>
+                <p id="multiple-result"></p>
+                <button class="multiple-incorrect">A burial ground containing over 3000 skeletons</button>
+                <button class="multiple-incorrect">Bongs still containing traces of marijuana and opium</button>
+                <button class="multiple-incorrect">A whole underground city</button>
+                <button class="multiple-correct">Remains of a hobbit-sized human</button>
             </div>
 
             <div class="section">
@@ -28,4 +30,20 @@
             </div>
         </div>
     </body>
+    <script>
+        const multipleResultParagraph = document.getElementById('multiple-result');
+        document.querySelectorAll('.multiple-incorrect').forEach((el) => {
+            el.addEventListener('click', () => {
+                el.style.backgroundColor = '#f88';
+                multipleResultParagraph.innerText = 'Incorrect!';
+                multipleResultParagraph.style.color = '#944';
+            });
+        });
+
+        document.querySelector('.multiple-correct').addEventListener('click', (el) => {
+            el.target.style.backgroundColor = '#8f8';
+                multipleResultParagraph.innerText = 'Correct!';
+                multipleResultParagraph.style.color = '#494';
+        });
+    </script>
 </html>
