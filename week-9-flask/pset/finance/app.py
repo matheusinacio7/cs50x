@@ -73,12 +73,16 @@ def buy():
     else:
         user_id = session.get("user_id")
         stock_symbol = request.form.get("symbol")
-        amount = int(request.form.get("shares"))
+        try:
+            amount = int(request.form.get("shares"))
+        except ValueError:
+            return apology("You must enter a valid whole number of shares to buy", 400)
+
         if amount < 1:
             return apology("You must buy at least one share", 400)
         quoted = lookup(stock_symbol)
         if quoted is None:
-            return apology("Could not find that stock", 404)
+            return apology("Could not find that stock", 400)
 
         price = float(quoted["price"])
         user = db.execute("SELECT * FROM users WHERE id = ?", user_id)[0]
@@ -206,14 +210,14 @@ def sell():
 
         user_stock = next((s for s in user_shares if s["stock"] == symbol), [None])
         if not user_stock:
-            return apology("You dont have shares of that stock to sell", 403)
+            return apology("You dont have shares of that stock to sell", 400)
         
         if any([not amount, amount > user_stock["amount"]]):
-            return apology("You don't have that many shares to sell", 403)
+            return apology("You don't have that many shares to sell", 400)
 
         quoted = lookup(symbol)
         if quoted is None:
-            return apology("Could not find that stock", 404)
+            return apology("Could not find that stock", 400)
 
         price = float(quoted["price"])
         user = db.execute("SELECT * FROM users WHERE id = ?", user_id)[0]
