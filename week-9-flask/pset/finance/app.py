@@ -42,8 +42,27 @@ def after_request(response):
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
-    return apology("TODO")
+    user_id = session.get("user_id")
+    user = db.execute("SELECT * FROM users WHERE id = ?", user_id)[0]
+    stocks = []
+    total_value = 0
+    user_stocks = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
+
+    if not len(user_stocks):
+        return render_template("index.html", total_value=total_value, stocks=stocks, cash=user["cash"])
+
+    for user_stock in user_stocks:
+        stock = {}
+        quote = lookup(user_stock["stock"])
+        if quote is None:
+            continue
+        stock["symbol"] = user_stock["stock"]
+        stock["shares"] = int(user_stock["amount"])
+        stock["price"] = float(quote["price"])
+        total_value += stock["price"] * stock["shares"]
+        stocks.append(stock)
+
+    return render_template("index.html", total_value=total_value, stocks=stocks, cash=user["cash"])
 
 
 @app.route("/buy", methods=["GET", "POST"])

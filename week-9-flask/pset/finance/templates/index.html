@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Portfolio
+{% endblock %}
+
+{% block main %}
+    <section>
+      <p>Cash in wallet: <strong>{{ cash | usd }}</strong></p>
+      <p>Total portfolio value: <strong>{{ total_value | usd }}</strong></p>
+    </section>
+    {% if stocks|length %}
+    <table>
+      <thead>
+        <tr>
+          <th>Stock</th>
+          <th>Shares</th>
+          <th>Price</th>
+          <th>Portfolio Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for stock in stocks %}
+          <tr>
+            <td>{{ stock["symbol"] }}</td>
+            <td>{{ stock["shares"] }}</td>
+            <td>{{ stock["price"] }}</td>
+            <td>{{ (stock["price"] * stock["shares"]) | usd }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <section>
+      <p>You don't have any stocks in your portfolio yet.</p>
+    </section>
+    {% endif %}
+{% endblock %}
