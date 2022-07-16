@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Transaction History
+{% endblock %}
+
+{% block main %}
+    <h1>Transactions</h1>
+    {% if transactions|length %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Transaction type</th>
+            <th>Symbol</th>
+            <th>Price per share</th>
+            <th>Amount</th>
+            <th>Total transaction value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for transaction in transactions %}
+            <tr>
+              <td>{{ transaction["timestamp"] }}</td>
+              <td>{{ transaction["transaction_type"] }}</td>
+              <td>{{ transaction["stock"] }}</td>
+              <td>{{ transaction["price_per"] | usd }}</td>
+              <td>{{ transaction["amount"] }}</td>
+              <td>{{ (transaction["amount"] * transaction["price_per"]) | usd }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <section class="m-auto">
+        <p>You haven't done any transaction</p>
+      </section>
+    {% endif %}
+{% endblock %}

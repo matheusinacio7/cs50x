@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Deposit
+{% endblock %}
+
+{% block main %}
+    <p class="m-auto">Minimum deposit: $500</p>
+    <form action="/deposit" method="post">
+        <div class="mb-3">
+            <input required class="form-control mx-auto w-auto" id="confirmation" name="amount" placeholder="Type the amount" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Deposit</button>
+    </form>
+{% endblock %}

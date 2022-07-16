@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote For {{ quoted["symbol"] }}
+{% endblock %}
+
+{% block main %}
+    <h1>Quote for  {{ quoted["name"] }}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Symbol</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ quoted["name"] }}</td>
+          <td>{{ quoted["symbol"] }}</td>
+          <td>{{ quoted["price"] | usd }}</td>
+        </tr>
+      </tbody>
+    </table>
+{% endblock %}
