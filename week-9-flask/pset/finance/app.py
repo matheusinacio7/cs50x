@@ -74,6 +74,8 @@ def buy():
         user_id = session.get("user_id")
         stock_symbol = request.form.get("symbol")
         amount = int(request.form.get("shares"))
+        if amount < 1:
+            return apology("You must buy at least one share", 400)
         quoted = lookup(stock_symbol)
         if quoted is None:
             return apology("Could not find that stock", 404)
@@ -184,5 +186,6 @@ def register():
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
-    """Sell shares of stock"""
+    if request.method == "GET":
+        return render_template("sell.html")
     return apology("TODO")
