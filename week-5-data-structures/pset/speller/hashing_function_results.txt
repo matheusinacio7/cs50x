@@ -1,0 +1,182 @@
+#1 FIRST LETTER ASCII CODE
+
+BUCKETS: 26
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 18:  used 15615 times
+    bucket 2:  used 13042 times
+    bucket 0:  used 9128 times
+LEAST USED BUCKETS:
+    bucket 23:  used 121 times
+    bucket 25:  used 348 times
+    bucket 24:  used 365 times
+
+code:
+unsigned int hash(const char *word)
+{
+    return toupper(word[0]) - 'A';
+}
+
+
+
+#2 SUM SQUARES OF ASCII CODES AND DISCARD FIRST AND LAST FOR LARGE ENOUGH WORDS
+
+BUCKETS: 1000
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 115:  used 249 times
+    bucket 730:  used 242 times
+    bucket 524:  used 237 times
+LEAST USED BUCKETS:
+    bucket 185:  used 76 times
+    bucket 805:  used 82 times
+    bucket 718:  used 83 times
+
+code:
+unsigned int hash(const char *word)
+{
+    int wlen = strlen(word);
+    int start_index = 0;
+    int end_index = wlen;
+
+    // if word is big enough, discard first and last letter
+    if (wlen > 5)
+    {
+        start_index += 1;
+        end_index -= 1;
+    }
+
+    // sum squares
+    int sum = 0;
+    for (int i = start_index; i < end_index; i++)
+    {
+        sum += word[i] * word[i];
+    }
+
+    return sum % N;
+}
+
+
+
+#3 SUM SQUARES OF ASCII CODES, NO DISCARD
+
+BUCKETS: 1000
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 951:  used 198 times
+    bucket 655:  used 188 times
+    bucket 115:  used 182 times
+LEAST USED BUCKETS:
+    bucket 919:  used 103 times
+    bucket 102:  used 104 times
+    bucket 551:  used 106 times
+
+code:
+unsigned int hash(const char *word)
+{
+    int wlen = strlen(word);
+
+    int sum = 0;
+    for (int i = 0; i < wlen; i++)
+    {
+        sum += word[i] * word[i];
+    }
+
+    return sum % N;
+}
+
+
+#4 SUM SQUARES OF ASCII CODES, NO DISCARD, MORE BUCKETS
+
+BUCKETS: 2000
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 1108:  used 104 times
+    bucket 524:  used 102 times
+    bucket 1199:  used 102 times
+LEAST USED BUCKETS:
+    bucket 1551:  used 39 times
+    bucket 1522:  used 42 times
+    bucket 1162:  used 46 times
+
+
+BUCKETS: 5000
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 4499:  used 58 times
+    bucket 2955:  used 54 times
+    bucket 180:  used 51 times
+LEAST USED BUCKETS:
+    bucket 999:  used 8 times
+    bucket 2001:  used 9 times
+    bucket 3487:  used 11 times
+
+
+
+#5 SUM CUBES OF ASCII CODES, GET MIDDLE DIGITS
+
+BUCKETS: 5000
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 2844:  used 59 times
+    bucket 911:  used 55 times
+    bucket 3752:  used 52 times
+LEAST USED BUCKETS:
+    bucket 3225:  used 11 times
+    bucket 2053:  used 12 times
+    bucket 2571:  used 12 times
+
+
+code:
+unsigned int hash(const char *word)
+{
+    int wlen = strlen(word);
+
+    __u_long sum = 0;
+    for (int i = 0; i < wlen; i++)
+    {
+        sum += word[i] * word[i] * word[i];
+    }
+
+    char as_word[15];
+    sprintf(as_word, "%lu", sum);
+    int digit_count = strlen(as_word);
+
+    int result;
+
+    if (digit_count > 4)
+    {
+        int discarded_digit_count = digit_count - 4;
+        int discarded_half = discarded_digit_count / 2;
+
+        char result_str[5];
+        result_str[4] = '\0';
+
+        for (int i = 0; i < 4; i++)
+        {
+            result_str[i] = as_word[i + discarded_half];
+        }
+
+        result = atoi(result_str);
+    }
+    else
+    {
+        result = sum;
+    }
+
+
+    return result % N;
+}
+
+MORE BUCKETS
+
+BUCKETS: 10000
+UNUSED BUCKETS: 0
+MOST USED BUCKETS:
+    bucket 6136:  used 37 times
+    bucket 3493:  used 35 times
+    bucket 9034:  used 34 times
+LEAST USED BUCKETS:
+    bucket 6319:  used 2 times
+    bucket 9301:  used 2 times
+    bucket 1257:  used 3 times
