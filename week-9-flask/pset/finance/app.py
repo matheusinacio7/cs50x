@@ -183,7 +183,13 @@ def register():
 
         hashed_password = generate_password_hash(password)
 
-        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+        try:
+            db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+        except ValueError as err:
+            if "UNIQUE constraint" in str(err):
+                return apology("invalid username and/or password", 400)
+            raise Exception(str(err))
+
         return redirect("/")
 
 
