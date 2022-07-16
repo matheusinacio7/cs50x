@@ -101,8 +101,12 @@ def buy():
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
-    return apology("TODO")
+    user_id = session.get("user_id")
+    user_transactions = db.execute("SELECT * FROM transactions WHERE user_id = ?", user_id)
+    for i in range(len(user_transactions)):
+        user_transactions[i]["amount"] = int(user_transactions[i]["amount"])
+        user_transactions[i]["price_per"] = float(user_transactions[i]["price_per"])
+    return render_template("history.html", transactions=user_transactions)
 
 
 @app.route("/login", methods=["GET", "POST"])
