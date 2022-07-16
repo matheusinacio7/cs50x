@@ -186,6 +186,8 @@ def register():
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
+    user_id = session.get("user_id")
+    user_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
     if request.method == "GET":
-        return render_template("sell.html")
+        return render_template("sell.html", shares=user_shares)
     return apology("TODO")
