@@ -118,7 +118,18 @@ def quote():
 def register():
     if request.method == "GET":
         return render_template("register.html")
-    return apology("TODO")
+    else:
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        if not all([confirmation, username, password, confirmation == password]):
+            return apology("invalid username and/or password", 400)
+
+        hashed_password = generate_password_hash(password)
+
+        db.execute("INSERT INTO users (username, hash) VALUES (?, ?)", username, hashed_password)
+        return redirect("/")
 
 
 @app.route("/sell", methods=["GET", "POST"])
