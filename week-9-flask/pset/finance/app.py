@@ -224,3 +224,18 @@ def sell():
 
         return redirect("/")
 
+
+@app.route("/deposit", methods=["GET", "POST"])
+@login_required
+def deposit():
+    if request.method == "GET":
+        return render_template("deposit.html")
+    else:
+        user_id = session.get("user_id")
+        amount = float(request.form.get("amount"))
+
+        if not amount or amount < 500:
+            return apology("you must deposit at least 500 USD", 400)
+
+        db.execute("UPDATE users SET cash = cash + ? WHERE id = ?", amount, user_id)
+        return redirect("/")
