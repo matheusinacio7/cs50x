@@ -93,10 +93,12 @@ def buy():
         user_new_cash = user_cash - total_cost
 
         db.execute("UPDATE users SET cash = ? WHERE id = ?", user_new_cash, user_id)
-        db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)", user_id, "BUY", quoted["symbol"], amount, price)
+        db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)",
+                   user_id, "BUY", quoted["symbol"], amount, price)
         user_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND stock = ?", user_id, quoted["symbol"])
         if user_shares:
-            db.execute("UPDATE shares SET amount = ? WHERE user_id = ? AND stock = ?", user_shares[0]["amount"] + amount, user_id, stock_symbol)
+            db.execute("UPDATE shares SET amount = ? WHERE user_id = ? AND stock = ?",
+                       user_shares[0]["amount"] + amount, user_id, stock_symbol)
         else:
             db.execute("INSERT INTO SHARES (user_id, stock, amount) VALUES (?, ?, ?)", user_id, stock_symbol, amount)
         return redirect("/")
@@ -225,12 +227,14 @@ def sell():
         total_price = price * amount
         user_new_cash = user_cash + total_price
         db.execute("UPDATE users SET cash = ? WHERE id = ?", user_new_cash, user_id)
-        db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)", user_id, "SELL", quoted["symbol"], amount, price)
+        db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)",
+                   user_id, "SELL", quoted["symbol"], amount, price)
 
         if amount == user_stock["amount"]:
             db.execute("DELETE FROM SHARES WHERE user_id = ? AND stock = ?", user_id, symbol)
         else:
-            db.execute("UPDATE shares SET amount = ? WHERE user_id = ? AND stock = ?", user_stock["amount"] - amount, user_id, symbol)
+            db.execute("UPDATE shares SET amount = ? WHERE user_id = ? AND stock = ?",
+                       user_stock["amount"] - amount, user_id, symbol)
 
         return redirect("/")
 
