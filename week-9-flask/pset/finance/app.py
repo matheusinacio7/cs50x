@@ -190,4 +190,33 @@ def sell():
     user_shares = db.execute("SELECT * FROM shares WHERE user_id = ?", user_id)
     if request.method == "GET":
         return render_template("sell.html", shares=user_shares)
-    return apology("TODO")
+    else:
+        amount = int(request.form.get("shares"))
+        symbol = request.form.get("symbol")
+
+        user_stock = next((s for s in user_shares if s["stock"] == symbol), [None])
+        if not user_stock:
+            return apology("You dont have shares of that stock to sell", 403)
+        
+        if any([not amount, amount > user_stock["amount"]]):
+            return apology("You don't have that many shares to sell", 403)
+
+        quoted = lookup(symbol)
+        if quoted is None:
+            return apology("Could not find that stock", 404)
+
+        price = float(quoted["price"])
+        user = db.execute("SELECT * FROM users WHERE id = ?", user_id)[0]
+        user_cash = int(user["cash"])
+        total_price = price * amount
+        user_new_cash = user_cash + total_price
+        db.execute("UPDATE users SET cash = ? WHERE id = ?", user_new_cash, user_id)
+        db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)", user_id, "SELL", quoted["symbol"], amount, price)
+
+        if amount == user_stock["amount"]:
+            db.execute("DELETE FROM SHARES WHERE user_id = ? AND stock = ?", user_id, symbol)
+        else:
+            db.execute("UPDATE shares SET amount = ? WHERE user_id = ? AND stock = ?", user_stock["amount"] - amount, user_id, symbol)
+
+        return redirect("/")
+
