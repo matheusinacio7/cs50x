@@ -51,7 +51,25 @@ def index():
 def buy():
     if request.method == "GET":
         return render_template("buy.html")
-    return apology("TODO")
+    else:
+        user_id = session.get("user_id")
+        stock_symbol = request.form.get("symbol")
+        amount = int(request.form.get("shares"))
+        quoted = lookup(stock_symbol)
+        if quoted is None:
+            return apology("Could not find that stock", 404)
+
+        price = float(quoted["price"])
+        user = db.execute("SELECT * FROM users WHERE id = ?", user_id)[0]
+        user_cash = int(user["cash"])
+        total_cost = price * amount
+        if total_cost > user_cash:
+            return apology("You dont have enough cash to buy that much stock", 400)
+        user_new_cash = user_cash - total_cost
+        
+        db.execute("UPDATE users SET cash = ? WHERE id = ?", user_new_cash, user_id)
+        db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)", user_id, "BUY", quoted["symbol"], amount, price)
+        return redirect("/")
 
 
 @app.route("/history")
