@@ -115,7 +115,8 @@ def quote():
     else:
         symbol = request.form.get("symbol")
         quoted = lookup(symbol)
-        print(quoted)
+        if quoted is None:
+            return apology("no stock with that symbol", 400)
         return render_template("quoted.html", quoted=quoted)
 
 
