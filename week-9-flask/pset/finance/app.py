@@ -66,9 +66,14 @@ def buy():
         if total_cost > user_cash:
             return apology("You dont have enough cash to buy that much stock", 400)
         user_new_cash = user_cash - total_cost
-        
+
         db.execute("UPDATE users SET cash = ? WHERE id = ?", user_new_cash, user_id)
         db.execute("INSERT INTO transactions (user_id, transaction_type, stock, amount, price_per) VALUES (?, ?, ?, ?, ?)", user_id, "BUY", quoted["symbol"], amount, price)
+        user_shares = db.execute("SELECT * FROM shares WHERE user_id = ? AND stock = ?", user_id, quoted["symbol"])
+        if user_shares:
+            db.execute("UPDATE shares SET amount = ? WHERE user_id = ? AND stock = ?", user_shares[0]["amount"] + amount, user_id, stock_symbol)
+        else:
+            db.execute("INSERT INTO SHARES (user_id, stock, amount) VALUES (?, ?, ?)", user_id, stock_symbol, amount)
         return redirect("/")
 
 

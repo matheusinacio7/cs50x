@@ -14,4 +14,15 @@ CREATE TABLE transactions (
 );
 
 CREATE INDEX user_index ON transactions (user_id);
-CREATE INDEX timestamp_index ON transactions(timestamp);
+CREATE INDEX timestamp_index ON transactions (timestamp);
+
+CREATE TABLE shares (
+  user_id INTEGER NOT NULL,
+  stock TEXT NOT NULL,
+  amount INTEGER NOT NULL,
+  PRIMARY KEY(user_id, stock),
+  FOREIGN KEY (user_id)
+    REFERENCES users (id)
+      ON DELETE CASCADE
+      ON UPDATE NO ACTION
+);
