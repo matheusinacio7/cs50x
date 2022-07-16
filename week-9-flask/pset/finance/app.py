@@ -112,8 +112,11 @@ def logout():
 def quote():
     if request.method == "GET":
         return render_template("quote.html")
-
-    return apology("TODO")
+    else:
+        symbol = request.form.get("symbol")
+        quoted = lookup(symbol)
+        print(quoted)
+        return render_template("quoted.html", quoted=quoted)
 
 
 @app.route("/register", methods=["GET", "POST"])
