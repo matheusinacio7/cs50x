@@ -1,0 +1,31 @@
+main {
+  max-width: 800px;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > header {
+  width: max-content;
+  justify-content: start;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav-link.active {
+  border-bottom: 3px solid rgb(160, 20, 230);
+}
+
+.book-cover {
+  width: 260px;
+  float: left;
+  margin-right: 20px;
+}
+
+.author-text {
+  text-align: right;
+}
